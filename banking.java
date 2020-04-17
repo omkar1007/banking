@@ -23,6 +23,7 @@ class bankAccount{
 		customerName = cname;
 		customerId = cid;
 		balance = 0;
+		previousTransaction = 0;
 		
 	}
 	
@@ -31,6 +32,7 @@ class bankAccount{
 		if(amount != 0) {
 			
 			balance += amount;
+			previousTransaction = amount;
 			
 		}
 		
@@ -39,10 +41,27 @@ class bankAccount{
 		if(amount != 0) {
 			
 			balance -= amount;
+			previousTransaction = -amount;
 			
 		}
 		
-	}  void showMenu() {
+	} void getPrevTransaction() {
+		
+		if(previousTransaction > 0) {
+			
+			System.out.println("Deposited : "+previousTransaction);
+			
+		} else if(previousTransaction < 0) {
+			
+			System.out.println("Withdrawn : "+Math.abs(previousTransaction));
+			
+		} else {
+			
+			System.out.println("No transaction occured.");
+			
+		}
+		
+	} void showMenu() {
 		
 		int command = 0;
 		int amount;
@@ -53,9 +72,9 @@ class bankAccount{
 		while(true) {
 			
 			System.out.println("Enter Command.\n1)Check Balance.\n2)Deposit.\n3)Withdraw.");
-			System.out.println("4)Exit");
+			System.out.println("4)Check Previous Transaction.\n5)Exit");
 			command = sct.nextInt();
-			if(command == 4) {
+			if(command == 5) {
 				
 				break;
 				
@@ -80,6 +99,11 @@ class bankAccount{
 					 withdraw(amount);
 					 System.out.println("--------------------------------------------");
 					 break;
+					 
+			case 4 : System.out.println("--------------------------------------------");
+					 getPrevTransaction();
+					 System.out.println("--------------------------------------------");
+					 break;
 			
 			default :  System.out.println("Invalid command. Try again.\n");
 						
@@ -87,9 +111,9 @@ class bankAccount{
 			
 			}
 			
-		}System.out.println("*****************");
+		}System.out.println("***********************************************");
 		System.out.println("Thank You for using our services.");
-		System.out.println("*****************");
+		System.out.println("***********************************************");
 		
 		
 	}
